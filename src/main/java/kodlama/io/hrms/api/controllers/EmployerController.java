@@ -27,7 +27,7 @@ public class EmployerController {
         return employerService.getAll();
     }
     @PostMapping("register")
-    public Result register( Employer employer) {
+    public Result register( @RequestBody  Employer employer) {
         return employerService.register(employer);
     }
     @PostMapping("login")

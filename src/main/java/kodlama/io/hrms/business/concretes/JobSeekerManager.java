@@ -34,7 +34,7 @@ public class JobSeekerManager implements JobSeekerService {
         }
 
         if(existEmail(jobSeeker.getEmail()).isSuccess()) {
-            return new ErrorResult("Kullanıcı zaten kayıtlı");
+            return new ErrorResult("Girmiş olduğunuz email sistmede zaten kayıtlı ");
         }
         if(existNatinalId(jobSeeker.getNationalIdentityNumber()).isSuccess()){
             return new ErrorResult("Bu kimlikli kişi kayıtlı");

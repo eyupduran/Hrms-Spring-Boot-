@@ -2,6 +2,7 @@ package kodlama.io.hrms.api.controllers;
 
 import kodlama.io.hrms.business.abstracts.UserService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.entities.concretes.Employer;
 import kodlama.io.hrms.entities.concretes.User;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +24,8 @@ public class UserController {
     public DataResult<List<User>> getall() {
         return this.userService.getAll();
     }
-
+    @GetMapping("/getById")
+    public  DataResult<User> getById(int id){
+        return this.userService.getById(id);
+    }
 }

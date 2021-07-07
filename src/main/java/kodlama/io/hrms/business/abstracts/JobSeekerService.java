@@ -9,14 +9,10 @@ import java.util.List;
 
 public interface JobSeekerService {
     DataResult<List<JobSeeker>> getAll();
-
     Result register(JobSeeker jobSeeker);
-
     Result login(String email, String password);
     Result existEmail(String email);
-
     Result update(JobSeeker jobSeeker);
-
     Result delete(JobSeeker jobSeeker);
     Result validation(JobSeeker jobSeeker);
 }
