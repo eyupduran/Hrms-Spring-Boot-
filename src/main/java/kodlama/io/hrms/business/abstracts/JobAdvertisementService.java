@@ -17,11 +17,13 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisement>> getByCityName(String cityName);
 
-    DataResult<JobAdvertisement> getById(int Id);
+    DataResult<JobAdvertisement> getById(int id);
 
     DataResult<List<JobAdvertisementDetailsDto>> getAllActiveJobAdvertList();
 
     DataResult<List<JobAdvertisementDetailsDto>> getAllActiveJobAdvertOrderByDateList();
 
     DataResult<List<JobAdvertisementDetailsDto>> getAllActiveJobAdvertListByEmployerId(int employerId);
+
+    Result updateActiveStatus(int id);
 }

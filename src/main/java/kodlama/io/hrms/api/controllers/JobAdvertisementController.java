@@ -3,7 +3,6 @@ package kodlama.io.hrms.api.controllers;
 import kodlama.io.hrms.business.abstracts.JobAdvertisementService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.entities.concretes.JobAdvertisement;
 import kodlama.io.hrms.entities.dtos.request.JobAdvertisementDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +56,10 @@ public class JobAdvertisementController {
     @GetMapping("/getAllActiveJobAdvertListByEmployerId")
     public DataResult<List<JobAdvertisementDetailsDto>> getAllActiveJobAdvertListByEmployerId(int employerId) {
         return this.jobAdvertisementService.getAllActiveJobAdvertListByEmployerId(employerId);
+    }
+    @PostMapping("/updateActiveStatus")
+    public Result updateActiveStatus( int id) {
+        return this.jobAdvertisementService.updateActiveStatus(id);
     }
 
 }

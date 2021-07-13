@@ -38,8 +38,8 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
-    public DataResult<JobAdvertisement> getById(int Id) {
-        return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getById(Id),"işlem başarılı");
+    public DataResult<JobAdvertisement> getById(int id) {
+        return new SuccessDataResult<JobAdvertisement>(this.jobAdvertisementDao.getById(id),"işlem başarılı");
     }
 
     @Override
@@ -55,6 +55,14 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public DataResult<List<JobAdvertisementDetailsDto>> getAllActiveJobAdvertListByEmployerId(int employerId) {
         return new SuccessDataResult<List<JobAdvertisementDetailsDto>>(this.jobAdvertisementDao.getAllActiveJobAdvertListByEmployerId(employerId),"Firmaya ait aktif tüm iş ilanları getirildi");
+    }
+
+    @Override
+    public Result updateActiveStatus(int id) {
+       JobAdvertisement jobAdverb= jobAdvertisementDao.getById(id);
+       jobAdverb.setActive(false);
+       this.jobAdvertisementDao.save(jobAdverb);
+        return new Result(true,"Aktiflik durumu güncellendi");
     }
 
 }

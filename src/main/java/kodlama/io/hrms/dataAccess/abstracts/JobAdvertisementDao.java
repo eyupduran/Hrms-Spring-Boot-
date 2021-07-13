@@ -12,7 +12,7 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
     List<JobAdvertisement> getByCity_Name(String cityName);//Şehir adına göre sorgu
 
-    JobAdvertisement getById(int Id);//İş ilanı ıd sine göre sorgu
+    JobAdvertisement getById(int id);//İş ilanı ıd sine göre sorgu
 
     // Sistemdeki tüm aktif iş ilanlarının listesi
     @Query("select new kodlama.io.hrms.entities.dtos.request.JobAdvertisementDetailsDto" +

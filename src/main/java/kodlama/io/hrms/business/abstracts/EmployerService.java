@@ -8,11 +8,14 @@ import java.util.List;
 
 public interface EmployerService {
     DataResult<List<Employer>> getAll();
+
     Result register(Employer employer);
-    Result login(String email,String password);
+
+    Result login(String email, String password);
 
     Result update(Employer employer);
 
     Result delete(Employer employer);
+
     Result validation(Employer employer);
 }
