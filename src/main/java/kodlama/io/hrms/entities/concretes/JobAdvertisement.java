@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
-@Table(name="JobAdvertisements")
+@Table(name = "JobAdvertisements")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,36 +19,39 @@ import java.util.Date;
 public class JobAdvertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
-    @Column(name ="description")
+    @Column(name = "description")
     private String description;
-    @Column(name ="minSalary")
+    @Column(name = "minSalary")
     private int minSalary;
-    @Column(name ="maxSalary")
+    @Column(name = "maxSalary")
     private int maxSalary;
-    @Column(name ="openPositionCount")
+    @Column(name = "openPositionCount")
     private int openPositionCount;
-    @Column(name ="lastApplyDate")
+    @Column(name = "lastApplyDate")
     private Date lastApplyDate;
-    @Column(name ="creationDate")
+    @Column(name = "creationDate")
     private Date creationDate;
     @NotNull
-    @Column(name="isActive")
+    @Column(name = "isActive")
     private boolean isActive;
 
     @ManyToOne()
-    @JoinColumn(name="jobPositionId")
+    @JoinColumn(name = "jobPositionId")
     private JobPosition jobPosition;
 
     @ManyToOne()
-    @JoinColumn(name="employerId")
+    @JoinColumn(name = "employerId")
     private Employer employer;
 
     @ManyToOne()
-    @JoinColumn(name ="cityId")
+    @JoinColumn(name = "cityId")
     private City city;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobAdvertisement")
+    private List<JobSeeker> jobSeekers;
 
 
 }

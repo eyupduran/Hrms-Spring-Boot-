@@ -1,49 +1,50 @@
 package kodlama.io.hrms.api.controllers;
 
-import kodlama.io.hrms.business.abstracts.CityService;
+import kodlama.io.hrms.business.abstracts.CvJobExperienceService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.concretes.City;
+import kodlama.io.hrms.entities.concretes.CvJobExperience;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/cities")
-public class CityController {
-    private CityService cityService;
+@RequestMapping("/api/jobExperiences")
+public class CvJobExperienceController {
+    private CvJobExperienceService cvJobExperienceService;
 
     @Autowired
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
+    public CvJobExperienceController(CvJobExperienceService cvJobExperienceService) {
+        this.cvJobExperienceService = cvJobExperienceService;
     }
-    @GetMapping("/getall")
-    public DataResult<List<City>> getall(){
+    @GetMapping("/getAll")
+    public DataResult<List<CvJobExperience>> getAll(){
+        return this.cvJobExperienceService.getAll();
+    }
 
-        return this.cityService.getAll();
-    }
     @PostMapping("/add")
-    public Result add(@RequestBody City city){
+    public Result add(@Valid @RequestBody CvJobExperience cvJobExperience){
 
-        return this.cityService.add(city);
+        return this.cvJobExperienceService.add(cvJobExperience);
     }
     @PostMapping("/delete")
-    public Result delete(City city){
+    public Result delete(CvJobExperience cvJobExperience){
 
-        return this.cityService.delete(city);
+        return this.cvJobExperienceService.delete(cvJobExperience);
     }
 
     @PostMapping("/update")
-    public Result update(City city){
+    public Result update(CvJobExperience cvJobExperience){
 
-        return this.cityService.update(city);
+        return this.cvJobExperienceService.update(cvJobExperience);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -1,49 +1,51 @@
 package kodlama.io.hrms.api.controllers;
 
-import kodlama.io.hrms.business.abstracts.CityService;
+import kodlama.io.hrms.business.abstracts.CvSkillService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
-import kodlama.io.hrms.entities.concretes.City;
+import kodlama.io.hrms.entities.concretes.CvSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/cities")
-public class CityController {
-    private CityService cityService;
+@RequestMapping("/api/skills")
+public class CvSkillController {
+
+    private CvSkillService cvSkillService;
 
     @Autowired
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
+    public CvSkillController(CvSkillService cvSkillService) {
+        this.cvSkillService = cvSkillService;
     }
-    @GetMapping("/getall")
-    public DataResult<List<City>> getall(){
+    @GetMapping("/getAll")
+    public DataResult<List<CvSkill>> getAll(){
+        return this.cvSkillService.getAll();
+    }
 
-        return this.cityService.getAll();
-    }
     @PostMapping("/add")
-    public Result add(@RequestBody City city){
+    public Result add(@Valid @RequestBody CvSkill cvSkill){
 
-        return this.cityService.add(city);
+        return this.cvSkillService.add(cvSkill);
     }
     @PostMapping("/delete")
-    public Result delete(City city){
+    public Result delete(CvSkill cvSkill){
 
-        return this.cityService.delete(city);
+        return this.cvSkillService.delete(cvSkill);
     }
 
     @PostMapping("/update")
-    public Result update(City city){
+    public Result update(CvSkill cvSkill){
 
-        return this.cityService.update(city);
+        return this.cvSkillService.update(cvSkill);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -59,5 +61,4 @@ public class CityController {
 
         return error;
     }
-
 }

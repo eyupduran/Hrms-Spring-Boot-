@@ -2,14 +2,18 @@ package kodlama.io.hrms.api.controllers;
 
 import kodlama.io.hrms.business.abstracts.SystemPersonelService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.ErrorDataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.SystemPersonel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/systempersonels")
@@ -25,8 +29,21 @@ public class SystemPersonelController {
         return this.systemPersonelService.getAll();
     }
     @PostMapping("/add")
-    public Result add(SystemPersonel systemPersonel){
+    public Result add(@Valid @RequestBody SystemPersonel systemPersonel){
 
         return this.systemPersonelService.add(systemPersonel);
+    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){
+
+        Map<String,String> validationErrors=new HashMap<>();
+
+        for (FieldError fieldError:exceptions.getBindingResult().getFieldErrors()){
+            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+        }
+        ErrorDataResult<Object> error=new ErrorDataResult<Object>(validationErrors,"Doğrulama Hatası");
+
+        return error;
     }
 }

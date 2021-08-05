@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="Cities")
+@Table(name = "Cities")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,7 +18,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name ="name")
+    @Column(name = "name")
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "city")
